@@ -1,7 +1,7 @@
 package com.netsensia.rivalchess.uci;
 
 import com.netsensia.rivalchess.config.Uci;
-import com.netsensia.rivalchess.engine.core.Search;
+import com.netsensia.rivalchess.engine.core.search.Search;
 
 import java.util.Timer;
 
@@ -10,7 +10,7 @@ public final class RivalUCI {
     private static final Search rivalSearch = new Search(System.out);
 
     public static void startEngineTimer(Search rivalSearch) {
-        rivalSearch.setUCIMode(true);
+        rivalSearch.setUciMode(true);
         EngineMonitor m_monitor = new EngineMonitor(rivalSearch);
         new Timer().schedule(m_monitor, Uci.UCI_TIMER_INTERVAL_MILLIS.getValue(), Uci.UCI_TIMER_INTERVAL_MILLIS.getValue());
     }

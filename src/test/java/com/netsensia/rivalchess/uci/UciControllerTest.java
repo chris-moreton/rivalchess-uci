@@ -1,6 +1,6 @@
 package com.netsensia.rivalchess.uci;
 
-import com.netsensia.rivalchess.engine.core.Search;
+import com.netsensia.rivalchess.engine.core.search.Search;
 import org.junit.Before;
 import org.junit.Test;
 

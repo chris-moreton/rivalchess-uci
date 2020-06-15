@@ -11,12 +11,12 @@ import com.netsensia.rivalchess.config.Uci;
 import com.netsensia.rivalchess.engine.core.ConstantsKt;
 import com.netsensia.rivalchess.model.Colour;
 import com.netsensia.rivalchess.enums.SearchState;
-import com.netsensia.rivalchess.engine.core.Search;
+import com.netsensia.rivalchess.engine.core.search.Search;
 import com.netsensia.rivalchess.exception.IllegalFenException;
 import com.netsensia.rivalchess.exception.InvalidMoveException;
 import com.netsensia.rivalchess.model.Board;
 import com.netsensia.rivalchess.model.util.FenUtils;
-import com.netsensia.rivalchess.util.ChessBoardConversion;
+import com.netsensia.rivalchess.util.ChessBoardConversionKt;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 
@@ -160,15 +160,15 @@ public class UCIController implements Runnable {
         if (isInfinite) {
             search.setMillisToThink(Limit.MAX_SEARCH_MILLIS.getValue());
             search.setSearchDepth(Limit.MAX_SEARCH_DEPTH.getValue() - 2);
-            search.setNodesToSearch(Limit.MAX_NODES_TO_SEARCH.getValue());
+            search.setNodesToSearch(Integer.MAX_VALUE);
         } else if (moveTime != -1) {
             search.setMillisToThink(moveTime);
             search.setSearchDepth(Limit.MAX_SEARCH_DEPTH.getValue() - 2);
-            search.setNodesToSearch(Limit.MAX_NODES_TO_SEARCH.getValue());
+            search.setNodesToSearch(Integer.MAX_VALUE);
         } else if (maxDepth != -1) {
             search.setSearchDepth(maxDepth);
             search.setMillisToThink(Limit.MAX_SEARCH_MILLIS.getValue());
-            search.setNodesToSearch(Limit.MAX_NODES_TO_SEARCH.getValue());
+            search.setNodesToSearch(Integer.MAX_VALUE);
         } else if (maxNodes != -1) {
             search.setSearchDepth(Limit.MAX_SEARCH_DEPTH.getValue() - 2);
             search.setMillisToThink(Limit.MAX_SEARCH_MILLIS.getValue());
@@ -260,7 +260,7 @@ public class UCIController implements Runnable {
             for (int pos = 2; pos < l; pos++) {
                 if (parts[pos].equals("moves")) {
                     for (int i = pos + 1; i < l; i++) {
-                        search.makeMove(ChessBoardConversion.getEngineMoveFromSimpleAlgebraic(parts[i]));
+                        search.makeMove(ChessBoardConversionKt.getEngineMoveFromSimpleAlgebraic(parts[i]));
                     }
                     break;
                 }

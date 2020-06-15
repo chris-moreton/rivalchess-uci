@@ -7,9 +7,6 @@ This is a UCI-compatible engine.
 
     ./gradlew build
     
-## Run
-    java -jar build/libs/rival-chess-android-engine.jar
-    
 ## Play
 
 Detailed instructions on the Universal Chess Interface (UCI) can be found [here](http://wbec-ridderkerk.nl/html/UCIProtocol.html).
