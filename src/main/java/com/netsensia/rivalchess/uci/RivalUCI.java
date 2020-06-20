@@ -1,7 +1,7 @@
 package com.netsensia.rivalchess.uci;
 
 import com.netsensia.rivalchess.config.Uci;
-import com.netsensia.rivalchess.engine.core.search.Search;
+import com.netsensia.rivalchess.engine.search.Search;
 
 import java.util.Timer;
 

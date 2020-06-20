@@ -1,6 +1,6 @@
 package com.netsensia.rivalchess.uci;
 
-import com.netsensia.rivalchess.engine.core.search.Search;
+import com.netsensia.rivalchess.engine.search.Search;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -54,6 +54,30 @@ public class UciControllerTest {
         await().atMost(10, SECONDS).until(() -> outSpy.toString().contains("bestmove g1f3"));
 
         assertTrue(outSpy.toString().contains("bestmove g1f3"));
+    }
+
+    @Test
+    public void testRegularPosition() {
+
+        uciController.processUCICommand("ucinewgame");
+        uciController.processUCICommand("position fen r3nrk1/2p2p1p/p1p1b1p1/2NpPq2/3R4/P1N1Q3/1PP2PPP/4R1K1 w - - 0 1");
+        uciController.processUCICommand("go depth 9");
+
+        await().atMost(10, SECONDS).until(() -> outSpy.toString().contains("bestmove g2g4"));
+
+        assertTrue(outSpy.toString().contains("bestmove g2g4"));
+    }
+
+    @Test
+    public void test13_0_3_fail_position() {
+
+        uciController.processUCICommand("ucinewgame");
+        uciController.processUCICommand("position fen 2Q5/P3kq2/5p1P/3b4/2p1p3/2P2N2/2P2PP1/6K1 b - -");
+        uciController.processUCICommand("go depth 8");
+
+        await().atMost(30, SECONDS).until(() -> outSpy.toString().contains("bestmove e4f3"));
+
+        assertTrue(outSpy.toString().contains("bestmove e4f3"));
     }
 
     @Test

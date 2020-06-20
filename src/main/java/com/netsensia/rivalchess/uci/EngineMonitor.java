@@ -3,8 +3,8 @@ package com.netsensia.rivalchess.uci;
 import java.io.PrintStream;
 import java.util.TimerTask;
 
+import com.netsensia.rivalchess.engine.search.Search;
 import com.netsensia.rivalchess.enums.SearchState;
-import com.netsensia.rivalchess.engine.core.search.Search;
 
 import static com.netsensia.rivalchess.util.ChessBoardConversionKt.getSimpleAlgebraicMoveFromCompactMove;
 

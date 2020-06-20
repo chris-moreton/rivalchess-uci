@@ -6,12 +6,10 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 
 import com.netsensia.rivalchess.config.BuildInfo;
-import com.netsensia.rivalchess.config.Limit;
 import com.netsensia.rivalchess.config.Uci;
-import com.netsensia.rivalchess.engine.core.ConstantsKt;
 import com.netsensia.rivalchess.model.Colour;
 import com.netsensia.rivalchess.enums.SearchState;
-import com.netsensia.rivalchess.engine.core.search.Search;
+import com.netsensia.rivalchess.engine.search.Search;
 import com.netsensia.rivalchess.exception.IllegalFenException;
 import com.netsensia.rivalchess.exception.InvalidMoveException;
 import com.netsensia.rivalchess.model.Board;
@@ -19,6 +17,10 @@ import com.netsensia.rivalchess.model.util.FenUtils;
 import com.netsensia.rivalchess.util.ChessBoardConversionKt;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
+
+import static com.netsensia.rivalchess.config.LimitKt.MAX_SEARCH_DEPTH;
+import static com.netsensia.rivalchess.config.LimitKt.MAX_SEARCH_MILLIS;
+import static com.netsensia.rivalchess.consts.BitboardsKt.FEN_START_POS;
 
 public class UCIController implements Runnable {
 
@@ -158,26 +160,26 @@ public class UCIController implements Runnable {
 
     private void setSearchOptions() {
         if (isInfinite) {
-            search.setMillisToThink(Limit.MAX_SEARCH_MILLIS.getValue());
-            search.setSearchDepth(Limit.MAX_SEARCH_DEPTH.getValue() - 2);
+            search.setMillisToThink(MAX_SEARCH_MILLIS);
+            search.setSearchDepth(MAX_SEARCH_DEPTH - 2);
             search.setNodesToSearch(Integer.MAX_VALUE);
         } else if (moveTime != -1) {
             search.setMillisToThink(moveTime);
-            search.setSearchDepth(Limit.MAX_SEARCH_DEPTH.getValue() - 2);
+            search.setSearchDepth(MAX_SEARCH_DEPTH - 2);
             search.setNodesToSearch(Integer.MAX_VALUE);
         } else if (maxDepth != -1) {
             search.setSearchDepth(maxDepth);
-            search.setMillisToThink(Limit.MAX_SEARCH_MILLIS.getValue());
+            search.setMillisToThink(MAX_SEARCH_MILLIS);
             search.setNodesToSearch(Integer.MAX_VALUE);
         } else if (maxNodes != -1) {
-            search.setSearchDepth(Limit.MAX_SEARCH_DEPTH.getValue() - 2);
-            search.setMillisToThink(Limit.MAX_SEARCH_MILLIS.getValue());
+            search.setSearchDepth(MAX_SEARCH_DEPTH - 2);
+            search.setMillisToThink(MAX_SEARCH_MILLIS);
             search.setNodesToSearch(maxNodes);
         } else if (whiteTime != -1) {
             int calcTime = (search.getMover() == Colour.WHITE ? whiteTime : blackTime) / (movesToGo == 0 ? 120 : movesToGo);
             int guaranteedTime = (search.getMover() == Colour.WHITE ? whiteInc : blackInc);
             int timeToThink = calcTime + guaranteedTime - Uci.UCI_TIMER_SAFTEY_MARGIN_MILLIS.getValue();
-            search.setMillisToThink(Limit.MAX_SEARCH_DEPTH.getValue() - 2);
+            search.setMillisToThink(MAX_SEARCH_DEPTH - 2);
         }
     }
 
@@ -271,7 +273,7 @@ public class UCIController implements Runnable {
     private Board getBoardModel(String s, String[] parts) throws IllegalFenException {
         Board board;
         if (parts[1].equals("startpos")) {
-            board = FenUtils.getBoardModel(ConstantsKt.FEN_START_POS);
+            board = FenUtils.getBoardModel(FEN_START_POS);
         } else {
             board = FenUtils.getBoardModel(s.substring(12).trim());
         }
