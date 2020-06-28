@@ -11,7 +11,6 @@ import com.netsensia.rivalchess.model.Colour;
 import com.netsensia.rivalchess.enums.SearchState;
 import com.netsensia.rivalchess.engine.search.Search;
 import com.netsensia.rivalchess.exception.IllegalFenException;
-import com.netsensia.rivalchess.exception.InvalidMoveException;
 import com.netsensia.rivalchess.model.Board;
 import com.netsensia.rivalchess.model.util.FenUtils;
 import com.netsensia.rivalchess.util.ChessBoardConversionKt;
@@ -248,14 +247,14 @@ public class UCIController implements Runnable {
 
                 playMovesFromPosition(parts);
 
-            } catch (IllegalFenException | InvalidMoveException e) {
+            } catch (IllegalFenException e) {
                 this.printStream.println("Illegal fen");
             }
 
         }
     }
 
-    private void playMovesFromPosition(String[] parts) throws InvalidMoveException {
+    private void playMovesFromPosition(String[] parts) {
         final int l = parts.length;
 
         if (l > 2) {
