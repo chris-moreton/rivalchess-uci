@@ -39,8 +39,6 @@ public class EngineMonitor extends TimerTask {
     }
 
     public void run() {
-        engine.setMillisSetByEngineMonitor(System.currentTimeMillis());
-
         if (engine.isOkToSendInfo()) {
             SearchState state = engine.getEngineState();
             if (state == SearchState.SEARCHING && !engine.abortingSearch) {
