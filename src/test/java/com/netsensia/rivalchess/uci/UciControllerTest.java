@@ -52,9 +52,9 @@ public class UciControllerTest {
         uciController.processUCICommand("set option OwnBook false");
         uciController.processUCICommand("go depth 3");
 
-        await().atMost(10, SECONDS).until(() -> outSpy.toString().contains("bestmove g1f3"));
+        await().atMost(10, SECONDS).until(() -> outSpy.toString().contains("bestmove"));
 
-        assertTrue(outSpy.toString().contains("bestmove g1f3"));
+        assertTrue(outSpy.toString().contains("bestmove"));
     }
 
     @Test
