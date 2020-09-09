@@ -6,6 +6,8 @@ This is a UCI-compatible engine.
 ## Build
 
     ./gradlew build
+
+The JAR file can then be found in the build/libs directtory.
     
 ## Play
 
@@ -23,3 +25,4 @@ Here is a brief example of how to use the command line interface.
     go depth 3
     info currmove g1h3 currmovenumber 20 depth 3 score cp 25 pv g1f3 g8f6 e2e3  time 1 nodes 108 nps 108000
     bestmove g1f3
+

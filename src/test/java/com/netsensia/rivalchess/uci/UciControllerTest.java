@@ -2,6 +2,7 @@ package com.netsensia.rivalchess.uci;
 
 import com.netsensia.rivalchess.engine.search.Search;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
@@ -11,6 +12,7 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.await;
 import static org.junit.Assert.assertTrue;
 
+@Ignore
 public class UciControllerTest {
 
     Search search;

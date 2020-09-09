@@ -19,7 +19,7 @@ import org.slf4j.Logger;
 
 import static com.netsensia.rivalchess.config.LimitKt.MAX_SEARCH_DEPTH;
 import static com.netsensia.rivalchess.config.LimitKt.MAX_SEARCH_MILLIS;
-import static com.netsensia.rivalchess.consts.BitboardsKt.FEN_START_POS;
+import static com.netsensia.rivalchess.consts.GameKt.FEN_START_POS;
 
 public class UCIController implements Runnable {
 
@@ -48,7 +48,7 @@ public class UCIController implements Runnable {
 
     @Override
     public void run() {
-        printStream.println("Welcome to Rival Chess UCI");
+        printStream.println("Welcome to Rival Chess UCI. Engine version " + BuildInfo.VERSION.getValue() + ".");
 
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         String s;
