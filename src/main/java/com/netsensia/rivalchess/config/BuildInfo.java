@@ -4,7 +4,6 @@ import com.netsensia.rivalchess.uci.UCIController;
 
 public enum BuildInfo {
 
-    VERSION ("31.0.0"),
     BUILD (UCIController.class.getPackage().getImplementationVersion()),
     ;
 

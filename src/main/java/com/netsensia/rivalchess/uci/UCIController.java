@@ -48,7 +48,7 @@ public class UCIController implements Runnable {
 
     @Override
     public void run() {
-        printStream.println("Welcome to Rival Chess UCI. Engine version " + BuildInfo.VERSION.getValue() + ".");
+        printStream.println("Welcome to Rival Chess UCI (" + BuildInfo.BUILD.getValue() + ")");
 
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         String s;
@@ -294,7 +294,7 @@ public class UCIController implements Runnable {
 
     private void handleIfUciCommand(String[] parts) {
         if (parts[0].equals("uci")) {
-            EngineMonitor.sendUCI("id name Rival (version " + BuildInfo.VERSION.getValue() + " build " + BuildInfo.BUILD.getValue() + ")");
+            EngineMonitor.sendUCI("id name Rival (build " + BuildInfo.BUILD.getValue() + ")");
             EngineMonitor.sendUCI("id author Chris Moreton");
             EngineMonitor.sendUCI("option name Hash type spin default 1 min 1 max 256");
             EngineMonitor.sendUCI("uciok");
