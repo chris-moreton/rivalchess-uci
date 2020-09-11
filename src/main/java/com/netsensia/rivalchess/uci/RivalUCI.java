@@ -11,8 +11,8 @@ public final class RivalUCI {
 
     public static void startEngineTimer(Search rivalSearch) {
         rivalSearch.setUciMode(true);
-        EngineMonitor m_monitor = new EngineMonitor(rivalSearch);
-        new Timer().schedule(m_monitor, Uci.UCI_TIMER_INTERVAL_MILLIS.getValue(), Uci.UCI_TIMER_INTERVAL_MILLIS.getValue());
+        EngineMonitor monitor = new EngineMonitor(rivalSearch);
+        new Timer().schedule(monitor, Uci.UCI_TIMER_INTERVAL_MILLIS.getValue(), Uci.UCI_TIMER_INTERVAL_MILLIS.getValue());
     }
 
     public static void main(String[] args) {

@@ -57,7 +57,6 @@ public class EngineMonitor extends TimerTask {
         String algebraicMove = getSimpleAlgebraicMoveFromCompactMove(engine.getCurrentDepthZeroMove());
 
         final String algebraicPath = pathAsString(engine.getCurrentPath()).trim();
-        // Belt and braces for the depth zero PV move
         if (!algebraicPath.equals("")) {
             sendUCI(
                     "info" +
