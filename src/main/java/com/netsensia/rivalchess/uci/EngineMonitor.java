@@ -57,7 +57,7 @@ public class EngineMonitor extends TimerTask {
         String algebraicMove = getSimpleAlgebraicMoveFromCompactMove(engine.getCurrentDepthZeroMove());
 
         final String algebraicPath = pathAsString(engine.getCurrentPath()).trim();
-        if (!algebraicPath.equals("")) {
+        if (!algebraicPath.equals("") && engine.isSearching()) {
             sendUCI(
                     "info" +
                     " currmove " + algebraicMove +
