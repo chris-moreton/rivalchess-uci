@@ -56,11 +56,9 @@ public class UCIController implements Runnable {
         search.setUseOpeningBook(false);
 
         try {
-
             while ((s = in.readLine()) != null) {
                 processUCICommand(s);
             }
-
         } catch (IOException | NumberFormatException e) {
             LOGGER.info(e.getMessage());
         }
@@ -178,7 +176,7 @@ public class UCIController implements Runnable {
             int calcTime = (search.getMover() == Colour.WHITE ? whiteTime : blackTime) / (movesToGo == 0 ? 120 : movesToGo);
             int guaranteedTime = (search.getMover() == Colour.WHITE ? whiteInc : blackInc);
             int timeToThink = calcTime + guaranteedTime - Uci.UCI_TIMER_SAFTEY_MARGIN_MILLIS.getValue();
-            search.setMillisToThink(MAX_SEARCH_DEPTH - 2);
+            search.setMillisToThink(timeToThink);
         }
     }
 

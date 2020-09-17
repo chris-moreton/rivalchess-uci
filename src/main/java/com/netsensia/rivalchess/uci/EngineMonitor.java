@@ -4,10 +4,8 @@ import java.io.PrintStream;
 import java.util.List;
 import java.util.TimerTask;
 
-import com.netsensia.rivalchess.engine.board.BoardExtensionsKt;
 import com.netsensia.rivalchess.engine.search.Search;
 import com.netsensia.rivalchess.engine.search.SearchPath;
-import com.netsensia.rivalchess.enums.SearchState;
 import com.netsensia.rivalchess.model.Board;
 import com.netsensia.rivalchess.model.Move;
 import com.netsensia.rivalchess.model.util.BoardUtils;
@@ -73,8 +71,7 @@ public class EngineMonitor extends TimerTask {
 
     public void run() {
         if (engine.isOkToSendInfo()) {
-            SearchState state = engine.getEngineState();
-            if (state == SearchState.SEARCHING && !engine.abortingSearch) {
+            if (engine.isSearching() && !engine.abortingSearch) {
                 printInfo();
             }
         }
