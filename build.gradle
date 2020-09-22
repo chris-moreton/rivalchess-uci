@@ -13,8 +13,8 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin'
 
 compileKotlin.kotlinOptions.jvmTarget = "1.8"
-def engine_version = '31.0.36'
-def uci_build = '1'
+def engine_version = '31.0.38'
+def uci_build = ''
 
 version = "${engine_version}-${uci_build}"
 jar.baseName("rivalchess")
