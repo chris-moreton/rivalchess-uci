@@ -14,7 +14,7 @@ apply plugin: 'kotlin'
 
 compileKotlin.kotlinOptions.jvmTarget = "1.8"
 def engine_version = '31.0.38'
-def uci_build = ''
+def uci_build = '1'
 
 version = "${engine_version}-${uci_build}"
 jar.baseName("rivalchess")
