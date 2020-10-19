@@ -160,18 +160,10 @@ public class UCIController implements Runnable {
             search.setMillisToThink(MAX_SEARCH_MILLIS);
             search.setSearchDepth(MAX_SEARCH_DEPTH - 2);
             search.setNodesToSearch(Integer.MAX_VALUE);
-        } else if (moveTime != -1) {
-            search.setMillisToThink(moveTime);
-            search.setSearchDepth(MAX_SEARCH_DEPTH - 2);
-            search.setNodesToSearch(Integer.MAX_VALUE);
-        } else if (maxDepth != -1) {
-            search.setSearchDepth(maxDepth);
-            search.setMillisToThink(MAX_SEARCH_MILLIS);
-            search.setNodesToSearch(Integer.MAX_VALUE);
-        } else if (maxNodes != -1) {
-            search.setSearchDepth(MAX_SEARCH_DEPTH - 2);
-            search.setMillisToThink(MAX_SEARCH_MILLIS);
-            search.setNodesToSearch(maxNodes);
+        } else if (moveTime != -1 || maxNodes != -1 || maxDepth != -1) {
+            search.setMillisToThink(moveTime != -1 ? moveTime : MAX_SEARCH_MILLIS);
+            search.setSearchDepth(maxDepth != -1 ? maxDepth : MAX_SEARCH_DEPTH - 2);
+            search.setNodesToSearch(maxNodes != -1 ? maxNodes : Integer.MAX_VALUE);
         } else if (whiteTime != -1) {
             int calcTime = (search.getMover() == Colour.WHITE ? whiteTime : blackTime) / (movesToGo == 0 ? 120 : movesToGo);
             int guaranteedTime = (search.getMover() == Colour.WHITE ? whiteInc : blackInc);
