@@ -163,7 +163,7 @@ public class UCIController implements Runnable {
         } else if (moveTime != -1 || maxNodes != -1 || maxDepth != -1) {
             search.setMillisToThink(moveTime != -1 ? moveTime : MAX_SEARCH_MILLIS);
             search.setSearchDepth(maxDepth != -1 ? maxDepth : MAX_SEARCH_DEPTH - 2);
-            search.setNodesToSearch(maxNodes != -1 ? maxNodes : Integer.MAX_VALUE);
+            search.setNodesToSearch(maxNodes > 0 ? maxNodes : Integer.MAX_VALUE);
         } else if (whiteTime != -1) {
             int calcTime = (search.getMover() == Colour.WHITE ? whiteTime : blackTime) / (movesToGo == 0 ? 120 : movesToGo);
             int guaranteedTime = (search.getMover() == Colour.WHITE ? whiteInc : blackInc);
