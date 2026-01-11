@@ -3,8 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.jvm' version '2.3.0'
 }
 
-def engine_version = '36.0.0'  // rivalchess-engine dependency version
-def uci_version = '37.0.0'     // this project's version
+def uci_version = '38.0.0'     // this project's version (now includes engine code)
 
 // Allow version override from command line: -Pversion=x.x.x
 version = project.hasProperty('version') && project.property('version') != 'unspecified'
@@ -40,7 +39,8 @@ repositories {
 
 dependencies {
     implementation 'org.slf4j:slf4j-jdk14:1.7.36'
-    implementation "com.netsensia.rivalchess:rivalchess-engine:${engine_version}"
+    implementation 'com.netsensia.rivalchess:rivalchess-openings:1.0.5'
+    implementation 'com.netsensia.rivalchess:rivalchess-model:7.0.4'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3'
 
     testImplementation 'junit:junit:4.13.2'
