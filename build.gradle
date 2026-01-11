@@ -1,27 +1,22 @@
-buildscript {
-    repositories {
-        jcenter()
-    }
-}
-
 plugins {
     id 'java'
-    id 'org.jetbrains.kotlin.jvm' version '1.4.0'
+    id 'org.jetbrains.kotlin.jvm' version '1.9.22'
 }
 
-apply plugin: 'kotlin-kapt'
-apply plugin: 'kotlin'
-
-compileKotlin.kotlinOptions.jvmTarget = "1.8"
-def engine_version = '34.0.1'
+def engine_version = '36.0.0'
 def uci_build = '1'
 
 version = "${engine_version}-${uci_build}"
-jar.baseName("rivalchess")
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
 
 jar {
+    archiveBaseName.set("rivalchess")
     from {
-        configurations.compile.collect {
+        configurations.runtimeClasspath.collect {
             it.isDirectory() ? it : zipTree(it)
         }
     }
@@ -32,25 +27,21 @@ jar {
                 'Implementation-Version': version
         )
     }
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
 repositories {
     mavenLocal()
     mavenCentral()
-    jcenter()
 }
 
 dependencies {
-    compile group: 'org.slf4j', name: 'slf4j-jdk14', version: '1.7.30'
+    implementation 'org.slf4j:slf4j-jdk14:1.7.36'
+    implementation "com.netsensia.rivalchess:rivalchess-engine:${engine_version}"
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3'
 
-    compile group: 'com.netsensia.rivalchess', name: 'rivalchess-engine', version: "${engine_version}"
-
-    implementation group: 'org.jetbrains.kotlinx', name: 'kotlinx-coroutines-core', version: '1.3.5'
-    compile group: 'com.ea.async', name: 'ea-async', version: '1.2.3'
-
-    testImplementation 'junit:junit:4.12'
-    testImplementation 'org.awaitility:awaitility:4.0.2'
-
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.awaitility:awaitility:4.2.0'
 }
 
 test {
@@ -59,13 +50,6 @@ test {
     testLogging.showStandardStreams = true
 }
 
-compileKotlin {
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
-}
-compileTestKotlin {
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
+kotlin {
+    jvmToolchain(17)
 }
