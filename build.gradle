@@ -1,12 +1,15 @@
 plugins {
     id 'java'
-    id 'org.jetbrains.kotlin.jvm' version '1.9.22'
+    id 'org.jetbrains.kotlin.jvm' version '2.3.0'
 }
 
-def engine_version = '36.0.0'
-def uci_build = '1'
+def engine_version = '36.0.0'  // rivalchess-engine dependency version
+def uci_version = '37.0.0'     // this project's version
 
-version = "${engine_version}-${uci_build}"
+// Allow version override from command line: -Pversion=x.x.x
+version = project.hasProperty('version') && project.property('version') != 'unspecified'
+    ? project.property('version')
+    : uci_version
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17
@@ -51,5 +54,7 @@ test {
 }
 
 kotlin {
-    jvmToolchain(17)
+    compilerOptions {
+        jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
+    }
 }
