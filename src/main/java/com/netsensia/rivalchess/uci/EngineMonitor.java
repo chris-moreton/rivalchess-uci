@@ -15,11 +15,9 @@ import static com.netsensia.rivalchess.util.ChessBoardConversionKt.getSimpleAlge
 public class EngineMonitor extends TimerTask {
     private final Search engine;
     private static PrintStream out;
-    private final Board board;
 
     public EngineMonitor(final Search engine) {
         this.engine = engine;
-        board = Board.fromFen(engine.getFen());
     }
 
     public static void setPrintStream(PrintStream out) {
@@ -31,7 +29,7 @@ public class EngineMonitor extends TimerTask {
     }
 
     private String pathAsString(final SearchPath path) {
-        Board localBoard = board;
+        Board localBoard = Board.fromFen(engine.getFen());
         final StringBuilder s = new StringBuilder();
         for (int i=0; i<path.height; i++) {
             final int pathMove = path.move[i];
