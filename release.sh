@@ -28,7 +28,7 @@ if ! git diff --quiet || ! git diff --staged --quiet; then
 fi
 
 # Update build.gradle
-sed -i "s/def uci_version = '[^']*'/def uci_version = '$VERSION'/" build.gradle
+sed -i '' "s/def uci_version = '[^']*'/def uci_version = '$VERSION'/" build.gradle
 
 echo "Updated build.gradle"
 
