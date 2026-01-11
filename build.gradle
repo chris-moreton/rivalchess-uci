@@ -3,7 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.jvm' version '2.3.0'
 }
 
-def uci_version = '38.0.0'     // this project's version (now includes engine code)
+def uci_version = '40.0.0'     // this project's version (now includes engine code)
 
 // Allow version override from command line: -Pversion=x.x.x
 version = project.hasProperty('version') && project.property('version') != 'unspecified'
